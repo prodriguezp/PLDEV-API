@@ -1,34 +1,36 @@
 const express = require('express');
 const mysql = require('mysql2');
 const variables = require('dotenv').config(); // Cargar las variables de entorno
-
+const cors = require('cors'); // Importar cors
 const app = express();
 const port = 3000;
 
+
+// Habilitar CORS para que cualquier origen pueda acceder
+app.use(cors());
+
+
+
 // Conexión a la base de datos MySQL
-const connection = mysql.createConnection({
+// Crear un pool de conexiones
+const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10, // Límite de conexiones concurrentes
+    queueLimit: 0        // No limitar la cola de conexiones
 });
 
 
-
-connection.connect((err) => {
-    if (err) {
-        console.error('Error conectando a la base de datos: ' + err.message);
-    } else {
-        console.log('Conectado a la base de datos MySQL.');
-    }
-});
 
 // Ruta: /proyectos/all
 app.get('/proyectos/all', (req, res) => {
     const query = 'SELECT * FROM proyecto';
-    connection.query(query, (err, results) => {
+    pool.query(query, (err, results) => {
         if (err) {
-            res.status(500).send('Error en la consulta');
+            res.status(500).send('Error en la consulta: '+err);
         } else {
             res.json(results);
         }
@@ -40,7 +42,7 @@ app.get('/proyectos/byName', (req, res) => {
     let { name } = req.query;
     name = "%"+name+"%";
     const query = 'SELECT * FROM proyecto WHERE titulo like ?';
-    connection.query(query, [name], (err, results) => {
+    pool.query(query, [name], (err, results) => {
         if (err) {
             res.status(500).send('Error en la consulta');
             console.log(err);
@@ -54,7 +56,7 @@ app.get('/proyectos/byName', (req, res) => {
 app.get('/proyectos/proceso', (req, res) => {
     const { estado } = req.query;
     const query = 'SELECT * FROM proyecto WHERE estado = "EN_PROCESO"';
-    connection.query(query, [estado], (err, results) => {
+    pool.query(query, [estado], (err, results) => {
         if (err) {
             res.status(500).send('Error en la consulta');
         } else {
@@ -67,7 +69,7 @@ app.get('/proyectos/proceso', (req, res) => {
 app.get('/proyectos/finalizados', (req, res) => {
     const { estado } = req.query;
     const query = 'SELECT * FROM proyecto WHERE estado = "FINALIZADOS"';
-    connection.query(query, [estado], (err, results) => {
+    pool.query(query, [estado], (err, results) => {
         if (err) {
             res.status(500).send('Error en la consulta');
         } else {
@@ -80,7 +82,7 @@ app.get('/proyectos/finalizados', (req, res) => {
 app.get('/proyectos/sinempezar', (req, res) => {
     const { estado } = req.query;
     const query = 'SELECT * FROM proyecto WHERE estado = "SIN_EMPEZAR"';
-    connection.query(query, [estado], (err, results) => {
+    pool.query(query, [estado], (err, results) => {
         if (err) {
             res.status(500).send('Error en la consulta');
         } else {
