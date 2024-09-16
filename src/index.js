@@ -41,7 +41,7 @@ app.get('/proyectos/all', (req, res) => {
 app.get('/proyectos/byName', (req, res) => {
     let { name } = req.query;
     name = "%"+name+"%";
-    const query = 'SELECT * FROM proyecto WHERE titulo like ?';
+    const query = 'SELECT * FROM proyecto WHERE LOWER(titulo) like LOWER(?)';
     pool.query(query, [name], (err, results) => {
         if (err) {
             res.status(500).send('Error en la consulta');
