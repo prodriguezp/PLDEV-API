@@ -1,0 +1,72 @@
+{
+  "home": {
+    "header": {
+      "title": "Desarrollador Fullstack con enfoque en Angular y Spring Boot",
+      "subtitle": "4 años de experiencia en desarrollo web y backend escalable"
+    },
+    "introduction": {
+      "paragraph": "Soy un desarrollador Fullstack con 4 años de experiencia en el uso de tecnologías como Angular y el ecosistema de Spring para crear soluciones web escalables. Mi enfoque principal es en el backend con Java, incluyendo Spring Boot, JPA, Spring Security y Spring Data, aunque también tengo experiencia en el desarrollo frontend con Angular. Me especializo en la creación de aplicaciones full stack robustas, priorizando la eficiencia y la escalabilidad."
+    },
+    "skills": {
+      "title": "Habilidades Destacadas",
+      "list": [
+        {
+          "text": "Desarrollo de APIs RESTful",
+          "class": "fa fa-cloud"
+        },{
+          "text": "Bases de datos SQL",
+          "class": "fa fa-database"
+        },{
+          "text": "Frontend con Angular",
+          "class": "fa fa-code"
+        },{
+          "text": "Desarrollo Fullstack",
+          "class": "fa fa-network-wired"
+        },{
+          "text": "Back-end con Java",
+          "class": "fa fa-server"
+        }
+      ]
+    },
+    "cta": [
+      {
+        "text": "Ver mis Proyectos",
+        "url": "/proyectos"
+      },
+      {
+        "text": "Contáctame",
+        "url": "/contacto"
+      }
+    ],
+    "projects": {
+      "title": "Proyectos Destacados",
+      "list": [
+        {
+          "name": "Proyecto 1",
+          "description": "Aplicación para restaurante con gestión de pedidos y carta en tiempo real usando Angular y Spring Boot.",
+          "technologies": ["Angular", "Spring Boot", "REST API", "SQL"]
+        },
+        {
+          "name": "Proyecto 2",
+          "description": "Desarrollo de sistema de gestión de inventarios para pequeñas empresas, integrando backend en Java y frontend en Angular.",
+          "technologies": ["Java", "Angular", "Spring Data", "MySQL"]
+        },
+        {
+          "name": "Proyecto 3",
+          "description": "Sistema de autenticación y autorización con Spring Security, implementado para una aplicación SaaS.",
+          "technologies": ["Spring Security", "Java", "REST API"]
+        },
+        {
+          "name": "Proyecto 4",
+          "description": "Plataforma de gestión de clientes para un negocio, con un frontend dinámico en Angular y backend robusto en Spring Boot.",
+          "technologies": ["Angular", "Spring Boot", "PostgreSQL"]
+        },
+        {
+          "name": "Proyecto 5",
+          "description": "Desarrollo full stack de una plataforma de comercio electrónico, con foco en la escalabilidad y rendimiento.",
+          "technologies": ["Angular", "Spring Boot", "REST API", "MySQL"]
+        }
+      ]
+    }
+  }
+}

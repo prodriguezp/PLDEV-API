@@ -4,7 +4,8 @@ const variables = require('dotenv').config(); // Cargar las variables de entorno
 const cors = require('cors'); // Importar cors
 const app = express();
 const port = 3000;
-
+const fs = require('fs');
+const path = require('path');
 
 // Habilitar CORS para que cualquier origen pueda acceder
 app.use(cors());
@@ -87,6 +88,26 @@ app.get('/proyectos/sinempezar', (req, res) => {
             res.status(500).send('Error en la consulta');
         } else {
             res.json(results);
+        }
+    });
+});
+
+// Ruta: /inicio/json
+app.get('/inicio/json', (req, res) => {
+    const jsonPath = path.join(__dirname, 'inicio-datos.json'); // Reemplaza con el nombre de tu archivo JSON
+
+    fs.readFile(jsonPath, 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send('Error al leer el archivo JSON');
+            console.log(err);
+        } else {
+            try {
+                const jsonData = JSON.parse(data); // Convierte el contenido en un objeto JSON
+                res.json(jsonData); // Envía el JSON como respuesta
+            } catch (parseError) {
+                res.status(500).send('Error al parsear el archivo JSON');
+                console.log(parseError);
+            }
         }
     });
 });
