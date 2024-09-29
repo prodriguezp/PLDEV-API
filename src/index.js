@@ -33,6 +33,10 @@ app.get('/proyectos/all', (req, res) => {
         if (err) {
             res.status(500).send('Error en la consulta: '+err);
         } else {
+            results.forEach(proyecto => {
+                proyecto.tecnologias = proyecto.tecnologias.split(";");
+                proyecto.tags = proyecto.tags.split(";");
+            })
             res.json(results);
         }
     });
